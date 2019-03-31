@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <meta name="viewport" content="width=device-width" />
+  <title>Cat Feed Tracker</title>
+</head>
+
+<body>
+  <div id="app">
+    <transition v-if="showForm" name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <div class="modal-header">
+              <h1 class="modal-title">New Log</h1>
+            </div>
+            <div class="modal-body">
+              <label>Name</label>
+              <br>
+              <input v-model="name">
+            </div>
+            <div class="modal-footer">
+              <button @click="toggleForm" class="ripple-button mdc-button">Close</button>
+              <button @click="addLog" class="ripple-button mdc-button">Log</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <transition v-if="showEditForm" name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <div class="modal-header">
+              <h1 class="modal-title">Edit Log</h1>
+            </div>
+            <div class="modal-body">
+              <label>Name</label>
+              <br>
+              <input v-model="editLog.name">
+            </div>
+            <div class="modal-footer">
+              <button @click="toggleEditForm" class="ripple-button mdc-button">Close</button>
+              <button @click="deleteLog" class="ripple-button mdc-button">Delete</button>
+              <button @click="updateLog" class="ripple-button mdc-button">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <div class="list-card mdc-card">
+      <div class="image-container">
+        <img src="/images/TachePicCropped.jpg" alt="Tache"></img>
+        <button id="add-log-button" class="ripple-button mdc-fab mdc-fab--extended" v-on:click="toggleForm">
+          <span class="material-icons mdc-fab__icon">add</span>
+          <span class="mdc-fab__label">Log Feeding</span>
+        </button>
+      </div>
+      <ul class="mdc-list mdc-list--two-line">
+        <li class="mdc-list-item" v-for="(log, index) in logs" @click="updateSelected(index)">
+          <span class="mdc-list-item__text">
+            <span class="mdc-list-item__primary-text">{{log.name}}</span>
+            <span class="mdc-list-item__secondary-text">{{getDateString(log.date)}}</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/material-components-web/dist/material-components-web.min.js"></script>
+  <script src="/script.js"></script>
+</body>
+
+</html>
