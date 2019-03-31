@@ -13,6 +13,11 @@ var app = new Vue({
   created() {
     this.getLogs();
   },
+  computed: {
+    getListOfLogs() {
+      return this.logs.slice(0).sort((a, b) => b.date - a.date);
+    }
+  },
   methods: {
     getDateString(time) {
       let options = {
@@ -31,14 +36,13 @@ var app = new Vue({
     toggleEditForm() {
       this.showEditForm = !this.showEditForm;
     },
-    updateSelected(index) {
-      this.editLog = this.logs[index];
+    updateSelected(log) {
+      this.editLog = log;
       this.toggleEditForm();
     },
     async getLogs() {
       try {
         let response = await axios.get("/api/logs");
-        console.log(response);
         this.logs = response.data;
         return true
       } catch (error) {

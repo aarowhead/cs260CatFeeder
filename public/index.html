@@ -61,7 +61,7 @@
         </button>
       </div>
       <ul class="mdc-list mdc-list--two-line">
-        <li class="mdc-list-item" v-for="(log, index) in logs" @click="updateSelected(index)">
+        <li class="mdc-list-item" v-for="log in getListOfLogs" @click="updateSelected(log)">
           <span class="mdc-list-item__text">
             <span class="mdc-list-item__primary-text">{{log.name}}</span>
             <span class="mdc-list-item__secondary-text">{{getDateString(log.date)}}</span>
@@ -69,6 +69,9 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div class="footer">
+    <a href="https://github.com/aarowhead/cs260CatFeeder">View on Github</a>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
